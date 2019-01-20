@@ -1,0 +1,164 @@
+
+html {
+    height: 100%;
+    background-color: #eee;
+}
+body {
+    height: 100%;
+    font: 400 16px/24px Roboto,sans-serif;
+    text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    font-family: 'Roboto',sans-serif;
+}
+main {
+    display: table;
+    width: 100%;
+    height: 100%;
+}
+main section {
+    display: table-cell;
+    vertical-align: middle;
+    height: 100%;
+}
+section .chat__container {
+    margin: auto;
+    width: 300px;
+    height: 500px;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 1px 8px 0 rgba(0,0,0,.2), 0 3px 4px 0 rgba(0,0,0,.14), 0 3px 3px -2px rgba(0,0,0,.12);
+}
+
+.ui.button {
+    cursor: pointer;
+    display: inline-block;
+    min-height: 1em;
+    outline: 0;
+    border: none;
+    vertical-align: baseline;
+    color: rgba(0,0,0,.6);
+    font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+    padding: .78571429em 1.5em .78571429em;
+    text-transform: none;
+    text-shadow: none;
+    line-height: 1em;
+    font-style: normal;
+    text-align: center;
+    text-decoration: none;
+    border-radius: .28571429rem;
+    -webkit-box-shadow: 0 0 0 1px transparent inset, 0 0 0 0 rgba(34,36,38,.15) inset;
+    box-shadow: 0 0 0 1px transparent inset, 0 0 0 0 rgba(34,36,38,.15) inset;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-transition: opacity .1s ease,background-color .1s ease,color .1s ease,background .1s ease,-webkit-box-shadow .1s ease;
+    transition: opacity .1s ease,background-color .1s ease,color .1s ease,background .1s ease,-webkit-box-shadow .1s ease;
+    transition: opacity .1s ease,background-color .1s ease,color .1s ease,box-shadow .1s ease,background .1s ease;
+    transition: opacity .1s ease,background-color .1s ease,color .1s ease,box-shadow .1s ease,background .1s ease,-webkit-box-shadow .1s ease;
+    will-change: '';
+    -webkit-tap-highlight-color: transparent;
+}
+.ui.input {
+    position: relative;
+    font-weight: 400;
+    font-style: normal;
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    color: rgba(0,0,0,.87);
+}
+.ui.input > input {
+    margin: 0;
+    max-width: 100%;
+    -webkit-box-flex: 1;
+    -ms-flex: 1 0 auto;
+    flex: 1 0 auto;
+    outline: 0;
+    -webkit-tap-highlight-color: rgba(255,255,255,0);
+    text-align: left;
+    line-height: 1.21428571em;
+    font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+    padding: .67857143em 1em;
+    background: #fff;
+    border: 1px solid rgba(34,36,38,.15);
+    color: rgba(0,0,0,.87);
+    border-radius: .28571429rem;
+    -webkit-transition: border-color .1s ease,-webkit-box-shadow .1s ease;
+    transition: border-color .1s ease,-webkit-box-shadow .1s ease;
+    transition: box-shadow .1s ease,border-color .1s ease;
+    transition: box-shadow .1s ease,border-color .1s ease,-webkit-box-shadow .1s ease;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border-top-right-radius: 0!important;
+    border-bottom-right-radius: 0!important;
+    border-right-color: transparent!important;
+    font-size: 14px;
+}
+.ui.input > .button {
+    border: 1px solid #e0e1e2;
+    border-radius: .28571429rem 0 0 .28571429rem;
+}
+.ui.input > label {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.ui.input > label + input + input {
+    border-radius: 0;
+    border-left: 1px;
+}
+.ui.input > input + .button {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+    font-size: 14px;
+    border-radius: 0 .28571429rem .28571429rem 0;
+    background: #e0e1e2 none;
+}
+#chat__message-input .ui.input {
+    width: 100%;
+}
+.chat-message__container-wrap {
+    display: table;
+    width: 100%;
+    height: calc(100% - 40px);
+}
+.chat-message__container {
+    display: table-cell;
+    vertical-align: bottom;
+    width: 100%;
+    height: 100%;
+}
+.chat-message {
+}
+.chat-message > div {
+    margin: 0 0 10px 0;
+    padding: 8px 10px 5px 10px;
+    border-radius: 3px;
+    clear: both;
+}
+.chat-message > div.user-request {
+    color: #444;
+    background-color: #ddd;
+    float: left;
+}
+.chat-message > div.server-response {
+    color: #fff;
+    background-color: #039be5;
+    float: right;
+}
+.inputfile {
+    width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}

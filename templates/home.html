@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="" />
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name=”robots” content=”index” />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="content-language" content="ko">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title></title>
+    <link rel="canonical" href="" />
+    <link rel="stylesheet" href="/static/css/home.css">
+    <script src="/static/js/jquery-3.2.1.min.js"></script>
+    <script defer src="/static/fontawesome-free-5.6.3-web/js/all.js"></script> <!--load all styles -->
+</head>
+
+<body>
+    <main>
+        <section>
+            <div class="chat__container">
+                <div class="chat-message__container-wrap">
+                    <div class="chat-message__container">
+                    </div>
+                </div>
+                <form id="chat__message-input">
+                    <div class="ui input">
+                        <label for="fileinput" class="ui button">
+                            <i class="fas fa-plus"></i>
+                        </label>
+                        <input type="file" (change)="fileEvent($event)" class="inputfile" id="fileinput" />
+                        <input type="text" id="message" placeholder="Ask something...">
+                        <button class="ui button" id="send-message">전송</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+    <script>
+        var chat_message_template = '<div class="chat-message" id="message-{!no!}"><div class="user-request">{!user-request-text!}</div><div class="server-response">{!server-response-text!}</div></div>';
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    var form_data = new FormData();
+                    form_data.append('file', $('#fileinput')[0].files[0]);
+                    $.ajax({
+                        type: 'POST',
+                        url: 'http://localhost:5050/api/classify',
+                        data: form_data,
+                        contentType: false,
+                        cache: false,
+                        processData: false,
+                        success: function(data) {
+                            var obj = JSON.parse(data);
+                            object_name = obj.object_name;
+                            console.log(obj);
+                            console.log(object_name);
+                            console.log(e.target);
+                            var no = $('.chat-message').length;
+                            var text = '나도 ' + object_name + ' 좋아해!';
+
+                            image_html = '<img style="max-width: 200px;" src="'+e.target.result+'">';
+                            chat_message_html = chat_message_template.replace('{!no!}', no);
+                            chat_message_html = chat_message_html.replace('{!user-request-text!}', image_html);
+                            chat_message_html = chat_message_html.replace('{!server-response-text!}', text);
+                            $('.chat-message__container').append(chat_message_html);
+                        }
+                    });
+
+
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $('#fileinput').change(function() {
+            readURL(this);
+            return false;
+        });
+        $('#send-message').click(function() {
+
+            var message = $('#message').val()
+            console.log(message);
+            if (message == undefined || message == '') { return false; }
+            $('#message').val('');
+
+            var no = $('.chat-message').length;
+
+            chat_message_html = chat_message_template.replace('{!no!}', no);
+            chat_message_html = chat_message_html.replace('{!user-request-text!}', message);
+            chat_message_html = chat_message_html.replace('{!server-response-text!}', '&nbsp;');
+            $('.chat-message__container').append(chat_message_html);
+
+            $.ajax({
+                url: "/reply/"+message,
+                type: "GET",
+                contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+                dataType: "json",
+                success: function(response_data) {
+                    if (response_data) {
+                        answer = response_data["answer"];
+                        console.log(answer);
+                        $('#message-'+no+' .server-response').text(answer);
+                    }
+                }
+            });
+
+            return false;
+        });
+
+        /*
+        $( "#chat__message-input" ).submit(function( event ) {
+
+            console.log(event);
+            var button_id = $(this).attr('id');
+            console.log(button_id);
+
+            var message = $(this).find('input').val()
+            console.log(message);
+            if (message == '') { return false; }
+            $(this).find('input').val('');
+
+            var no = $('.chat-message').length;
+            console.log(no);
+
+            chat_message_html = chat_message_template.replace('{!no!}', no);
+            chat_message_html = chat_message_html.replace('{!user-request-text!}', message);
+            chat_message_html = chat_message_html.replace('{!server-response-text!}', '&nbsp;');
+
+            $('.chat-message__container').append(chat_message_html);
+
+            $.ajax({
+                url: "/reply/"+message,
+                type: "GET",
+                contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+                dataType: "json",
+                success: function(response_data) {
+                    if (response_data) {
+                        answer = response_data["answer"];
+                        console.log(answer);
+                        $('#message-'+no+' .server-response').text(answer);
+                    }
+                }
+            });
+
+            event.preventDefault();
+        });
+        */
+    </script>
+</body>
+
+</html>

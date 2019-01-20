@@ -1,0 +1,12 @@
+# log_file=nmt_model\log_1547925399
+# Start step 0, lr 1, Sun Jan 20 04:16:41 2019
+  step 100 lr 1 step-time 0.04s wps 0.41K ppl 7.15 gN 1.74 bleu 0.00, Sun Jan 20 04:17:15 2019
+  step 200 lr 1 step-time 0.02s wps 0.75K ppl 4.31 gN 2.87 bleu 0.00, Sun Jan 20 04:17:56 2019
+  step 300 lr 1 step-time 0.02s wps 0.74K ppl 1.14 gN 0.33 bleu 0.00, Sun Jan 20 04:18:47 2019
+  step 400 lr 1 step-time 0.02s wps 0.72K ppl 1.00 gN 0.01 bleu 0.00, Sun Jan 20 04:19:47 2019
+  step 500 lr 1 step-time 0.03s wps 0.71K ppl 1.00 gN 0.00 bleu 0.00, Sun Jan 20 04:20:58 2019
+  step 600 lr 1 step-time 0.02s wps 0.72K ppl 1.00 gN 0.00 bleu 0.00, Sun Jan 20 04:22:20 2019
+  step 700 lr 1 step-time 0.03s wps 0.70K ppl 1.00 gN 0.00 bleu 0.00, Sun Jan 20 04:23:57 2019
+  step 800 lr 1 step-time 0.03s wps 0.69K ppl 1.00 gN 0.00 bleu 0.00, Sun Jan 20 04:25:43 2019
+  step 900 lr 1 step-time 0.03s wps 0.68K ppl 1.00 gN 0.00 bleu 0.00, Sun Jan 20 04:27:39 2019
+  step 1000 lr 1 step-time 0.03s wps 0.69K ppl 1.00 gN 0.00 bleu 0.00, Sun Jan 20 04:29:47 2019
