@@ -2,7 +2,8 @@
 make vocab file for training. train.all means a merged file from train.req & train.rep
 
 ``` bash
-  	python generate_vocab.py < data\train.all > data\vocab.req
+  	python generate_vocab.py < data\train.req > data\vocab.req
+  	python generate_vocab.py < data\train.rep > data\vocab.rep
 ```
 
 ``` bash
