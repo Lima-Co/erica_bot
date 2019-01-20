@@ -13,6 +13,8 @@ from nmt.utils import misc_utils as utils
 import argparse
 import sys
 import re
+# Windows
+import msvcrt
 import config as FLAGS
 
 def remove_special_char(s):
@@ -27,8 +29,6 @@ class Chat:
             return ''
 
         infer_data = [remove_special_char(s)]
-
-        print ('[{}]'.format(s))
 
         self.sess.run(
             self.infer_model.iterator.initializer,
@@ -93,12 +93,43 @@ class Chat:
     def run(self, flags, default_hparams):
         self.nmt_main(flags, default_hparams)
 
+        # windows에 최적화
+        try:
+            sys.stdout.write("> ")
+            sys.stdout.flush()
+
+            sentence = ''
+            c = msvcrt.getwch()
+            while True:
+                # ctrl + c
+                if c == '':
+                    self.sess.close()
+                    sys.exit()
+
+                sys.stdout.write(c)
+                sys.stdout.flush()
+
+                if c == '\r':
+                    print ('> {}'.format(sentence))
+                    print(self.reply(sentence))
+                    sentence = ''
+                    sys.stdout.write("> ")
+                    sys.stdout.flush()
+                else:
+                    sentence += c
+                c = msvcrt.getwch()
+        except KeyboardInterrupt:
+            self.sess.close()
+            sys.exit()
+
+        '''
         try:
             sys.stdout.write("> ")
             sys.stdout.flush()
             line = sys.stdin.readline()
 
             while line:
+                print ('/{}/'.format(line))
                 print(self.reply(line.strip()))
                 sys.stdout.write("\n> ")
                 sys.stdout.flush()
@@ -106,6 +137,7 @@ class Chat:
         except KeyboardInterrupt:
             self.sess.close()
             sys.exit()
+        '''
 
 def create_hparams(flags):
     return tf.contrib.training.HParams(
@@ -116,16 +148,7 @@ def create_hparams(flags):
 def main(unused_argv):
     default_hparams = create_hparams(FLAGS)
     chat = Chat()
-
-    chat.nmt_main(FLAGS, default_hparams)
-    print(chat.reply('안녕하세요'))
-    print(chat.reply('직업이'))
-    print(chat.reply('이름이 뭐에요'))
-    print(chat.reply('반가워요'))
-    print(chat.reply('이름은?'))
-    print(chat.reply('안녕'))
-
-    #chat.run(FLAGS, default_hparams)
+    chat.run(FLAGS, default_hparams)
 
 if __name__ == "__main__":
     tf.app.run(main=main, argv=[sys.argv[0]])
