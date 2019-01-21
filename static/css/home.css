@@ -124,17 +124,20 @@ section .chat__container {
 }
 #chat__message-input .ui.input {
     width: 100%;
+    margin-top: 15px;
 }
 .chat-message__container-wrap {
     display: table;
     width: 100%;
-    height: calc(100% - 40px);
+    height: calc(100% - 55px);
 }
 .chat-message__container {
     display: table-cell;
     vertical-align: bottom;
     width: 100%;
     height: 100%;
+    display: block;
+    overflow-y: auto;
 }
 .chat-message {
 }

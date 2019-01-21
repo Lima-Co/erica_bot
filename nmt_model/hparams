@@ -14,7 +14,7 @@
     "embed_prefix": null,
     "encoder_type": "uni",
     "eos": "</s>",
-    "epoch_step": 0,
+    "epoch_step": 1,
     "forget_bias": 1.0,
     "infer_batch_size": 32,
     "infer_mode": "greedy",

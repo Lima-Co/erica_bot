@@ -69,6 +69,8 @@
                             chat_message_html = chat_message_html.replace('{!user-request-text!}', image_html);
                             chat_message_html = chat_message_html.replace('{!server-response-text!}', text);
                             $('.chat-message__container').append(chat_message_html);
+                            $('.chat-message__container').scrollTop($('.chat-message__container').prop('scrollHeight')+300);
+                            console.log('scrolltop');
                         }
                     });
 
@@ -107,6 +109,8 @@
                         answer = response_data["answer"];
                         console.log(answer);
                         $('#message-'+no+' .server-response').text(answer);
+                        $('.chat-message__container').scrollTop($('.chat-message__container').prop('scrollHeight')+300);
+                        console.log('scrolltop');
                     }
                 }
             });
